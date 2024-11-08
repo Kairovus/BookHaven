@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AuthorBean.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;BookHaven&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">bean</a> &gt; <span class="el_source">AuthorBean.java</span></div><h1>AuthorBean.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package bean;
+
+import dao.AuthorDAO;
+import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import model.Author;
+
+/**
+ *
+ * @author Z
+ */
+@ManagedBean(name = &quot;authorBean&quot;)
+@SessionScoped
+
+<span class="fc" id="L21">public class AuthorBean {</span>
+
+<span class="fc" id="L23">    private Author author = new Author();</span>
+    private List&lt;Author&gt; authors;
+<span class="fc" id="L25">    private AuthorDAO authorDAO = new AuthorDAO();</span>
+    private String searchname;
+
+    public List&lt;Author&gt; getAuthors() {
+<span class="fc bfc" id="L29" title="All 4 branches covered.">        if (searchname != null &amp;&amp; !searchname.isEmpty()) {</span>
+<span class="fc" id="L30">            authors = authorDAO.getAuthorByLastname(searchname);</span>
+        } else {
+<span class="fc" id="L32">            authors = authorDAO.getAllAuthors();</span>
+        }
+<span class="fc" id="L34">        return authors;</span>
+    }
+
+    public String saveAuthor() {
+<span class="fc" id="L38">        authorDAO.saveAuthor(author);</span>
+<span class="fc" id="L39">        author = new Author();</span>
+<span class="fc" id="L40">        return &quot;authors&quot;;</span>
+    }
+
+    public String updateAuthor() {
+<span class="fc" id="L44">        authorDAO.updateAuthor(author);</span>
+<span class="fc" id="L45">        author = new Author();</span>
+<span class="fc" id="L46">        return &quot;authors&quot;;</span>
+    }
+
+    public String editAuthor(Author author) {
+<span class="fc" id="L50">        this.author = author;</span>
+<span class="fc" id="L51">        author = new Author();</span>
+<span class="fc" id="L52">        return &quot;editAuthor&quot;;</span>
+    }
+
+    public String deleteAuthor(int authorId) {
+<span class="fc" id="L56">        authorDAO.deleteAuthors(authorId);</span>
+<span class="fc" id="L57">        authors = authorDAO.getAllAuthors();</span>
+<span class="fc" id="L58">        return &quot;authors&quot;;</span>
+    }
+
+
+    public void search() {
+<span class="fc" id="L63">        getAuthors();</span>
+<span class="fc" id="L64">    }</span>
+
+    public Author getAuthor() {
+<span class="fc" id="L67">        return author;</span>
+    }
+
+    public void setBook(Author book) {
+<span class="fc" id="L71">        this.author = book;</span>
+<span class="fc" id="L72">    }</span>
+
+    public String getSearchName() {
+<span class="fc" id="L75">        return searchname;</span>
+    }
+
+    public void setSearchName(String searchname) {
+<span class="fc" id="L79">        this.searchname = searchname;</span>
+<span class="fc" id="L80">    }</span>
+    
+    public void setAuthorDAO(AuthorDAO authorDAO){
+<span class="fc" id="L83">        this.authorDAO = authorDAO;</span>
+<span class="fc" id="L84">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

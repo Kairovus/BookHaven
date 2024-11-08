@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 28, 2024 10:31:33 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Customer" table="customer" catalog="library" optimistic-lock="version">
+        <id name="customerId" type="java.lang.Integer">
+            <column name="customer_id" />
+            <generator class="identity" />
+        </id>
+        <property name="firstName" type="string">
+            <column name="first_name" length="100" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="last_name" length="100" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="100" unique="true" />
+        </property>
+        <property name="phone" type="string">
+            <column name="phone" length="15" unique="true" />
+        </property>
+        <property name="membershipDate" type="date">
+            <column name="membership_date" length="10" />
+        </property>
+        <set name="bookTransactions" table="book_transaction" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="customer_id" />
+            </key>
+            <one-to-many class="model.BookTransaction" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CustomerBean.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;BookHaven&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">bean</a> &gt; <span class="el_source">CustomerBean.java</span></div><h1>CustomerBean.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package bean;
+
+import dao.CustomerDAO;
+import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
+import model.Customer;
+
+/**
+ *
+ * @author Z
+ */
+@ManagedBean(name = &quot;customerBean&quot;)
+@SessionScoped
+
+<span class="fc" id="L22">public class CustomerBean {</span>
+
+    private List&lt;Customer&gt; customers;
+<span class="fc" id="L25">    private Customer customer = new Customer();</span>
+<span class="fc" id="L26">    private CustomerDAO customerDAO = new CustomerDAO();</span>
+    private String searchname;
+
+    public List&lt;Customer&gt; getCustomers() {
+<span class="pc bpc" id="L30" title="1 of 4 branches missed.">        if (searchname != null &amp;&amp; !searchname.isEmpty()) {</span>
+<span class="fc" id="L31">            customers = customerDAO.getCustomerByName(searchname);</span>
+        } else {
+<span class="fc" id="L33">            customers = customerDAO.getAllCustomers();</span>
+        }
+<span class="fc" id="L35">        return customers;</span>
+    }
+
+    public String saveCustomer() {
+<span class="fc" id="L39">        customerDAO.saveCustomer(customer);</span>
+<span class="fc" id="L40">        customer = new Customer();</span>
+<span class="fc" id="L41">        return &quot;customers&quot;;</span>
+    }
+
+    public String updateCustomer() {
+<span class="fc" id="L45">        customerDAO.updateCustomer(customer);</span>
+<span class="fc" id="L46">        customer = new Customer();</span>
+<span class="fc" id="L47">        return &quot;customers&quot;;</span>
+    }
+
+    public String editCustomer(Customer customer) {
+<span class="fc" id="L51">        this.customer = customer;</span>
+<span class="fc" id="L52">        return &quot;editCustomer.xhtml&quot;;</span>
+    }
+
+    public String deleteCustomer(int customerId) {
+<span class="fc" id="L56">        customerDAO.deleteCustomer(customerId);</span>
+<span class="fc" id="L57">        customers = customerDAO.getAllCustomers();</span>
+<span class="fc" id="L58">        return &quot;customers&quot;;</span>
+    }
+
+    public String clearCustomer() {
+<span class="fc" id="L62">        this.customer = new Customer();</span>
+<span class="fc" id="L63">        return &quot;customers&quot;;</span>
+    }
+
+    public void search() {
+<span class="fc" id="L67">        getCustomers();</span>
+<span class="fc" id="L68">    }</span>
+
+    public Customer getCustomer() {
+<span class="fc" id="L71">        return customer;</span>
+    }
+
+    public void setCustomer(Customer customer) {
+<span class="fc" id="L75">        this.customer = customer;</span>
+<span class="fc" id="L76">    }</span>
+
+    public String getSearchName() {
+<span class="fc" id="L79">        return searchname;</span>
+    }
+
+    public void setSearchName(String searchname) {
+<span class="fc" id="L83">        this.searchname = searchname;</span>
+<span class="fc" id="L84">    }</span>
+    
+    public void setCustomerDAO(CustomerDAO customerDAO){
+<span class="fc" id="L87">        this.customerDAO = customerDAO;</span>
+<span class="fc" id="L88">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

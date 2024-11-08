@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BookTransactionBean.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;BookHaven&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">bean</a> &gt; <span class="el_source">BookTransactionBean.java</span></div><h1>BookTransactionBean.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package bean;
+
+import dao.BookTransactionDAO;
+import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
+import model.BookTransaction;
+
+/**
+ *
+ * @author Z
+ */
+@ManagedBean(name = &quot;bookTransactionBean&quot;)
+@SessionScoped
+
+<span class="fc" id="L22">public class BookTransactionBean {</span>
+
+    private List&lt;BookTransaction&gt; booktransactions;
+<span class="fc" id="L25">    private BookTransaction booktransaction = new BookTransaction();</span>
+<span class="fc" id="L26">    private BookTransactionDAO booktransactionDAO = new BookTransactionDAO();</span>
+    private int searchid;
+
+    public List&lt;BookTransaction&gt; getBookTransactions() {
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        if (searchid &gt; 0) {</span>
+<span class="fc" id="L31">            booktransactions = booktransactionDAO.getBookTransactionById(searchid);</span>
+        } else {
+<span class="fc" id="L33">            booktransactions = booktransactionDAO.getAllBookTransactions();</span>
+        }
+<span class="fc" id="L35">        return booktransactions;</span>
+    }
+
+    public String saveBookTransaction() {
+<span class="fc" id="L39">        booktransactionDAO.saveBookTransaction(booktransaction);</span>
+<span class="fc" id="L40">        booktransaction = new BookTransaction();</span>
+<span class="fc" id="L41">        return &quot;transactions&quot;;</span>
+    }
+
+    public String updateBookTransaction() {
+<span class="fc" id="L45">        booktransactionDAO.updateBookTransaction(booktransaction);</span>
+<span class="fc" id="L46">        booktransaction = new BookTransaction();</span>
+<span class="fc" id="L47">        return &quot;transactions&quot;;</span>
+    }
+
+    public String editBookTransaction(BookTransaction booktransaction) {
+<span class="fc" id="L51">        this.booktransaction = booktransaction;</span>
+<span class="fc" id="L52">        return &quot;editTransaction.xhtml&quot;;</span>
+    }
+
+    public String deleteBookTransaction(int transactionId) {
+<span class="fc" id="L56">        booktransactionDAO.deleteBookTransaction(transactionId);</span>
+<span class="fc" id="L57">        booktransactions = booktransactionDAO.getAllBookTransactions();</span>
+<span class="fc" id="L58">        return &quot;transactions&quot;;</span>
+    }
+
+    public String clearBookTransaction() {
+<span class="fc" id="L62">        this.booktransaction = new BookTransaction();</span>
+<span class="fc" id="L63">        return &quot;transactions&quot;;</span>
+    }
+
+    public void search() {
+<span class="fc" id="L67">        getBookTransactions();</span>
+<span class="fc" id="L68">    }</span>
+
+    public BookTransaction getBooktransaction() {
+<span class="fc" id="L71">        return booktransaction;</span>
+    }
+
+    public void setBooktransaction(BookTransaction booktransaction) {
+<span class="fc" id="L75">        this.booktransaction = booktransaction;</span>
+<span class="fc" id="L76">    }</span>
+
+    public int getSearchId() {
+<span class="fc" id="L79">        return searchid;</span>
+    }
+
+    public void setSearchId(int searchid) {
+<span class="fc" id="L83">        this.searchid = searchid;</span>
+<span class="fc" id="L84">    }</span>
+    
+    public void setBookTransactionDAO(BookTransactionDAO bookTransactionDAO){
+<span class="fc" id="L87">        this.booktransactionDAO = bookTransactionDAO;</span>
+<span class="fc" id="L88">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

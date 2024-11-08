@@ -1,0 +1,213 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Staff Page</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="vendor/bootstrap/css/datepicker.css" rel="stylesheet" />
+        <style>
+            .logo{
+                width: 5%;
+                border-radius: 1rem;
+                margin-right: 1rem;
+            }
+
+            .nav-link{
+                font-size: 1.5rem;
+                color: lightgray;
+                margin: 10px;
+                transition: 0.5s;
+            }
+
+            .nav-link:hover{
+                font-size: 1.6rem;
+                color: white;
+                margin: 10px;
+            }
+
+            .navbar-brand{
+                font-size: 1.5rem;
+            }
+
+            .navbar {
+                width:100%;
+                overflow: auto;
+            }
+
+            #form1, #form2{
+                margin-top: 2%;
+                margin-left: auto;
+                margin-right: auto;
+                width: 90%;
+            }
+
+            .search-btn{
+                margin-top: 2%;
+                margin-left:5%;
+                font-size: 1.3rem;
+            }
+
+            .action{
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+            }
+
+            .header{
+                margin-bottom: 1%;
+                display: flex;
+            }
+
+            .search{
+                width: 70%
+            }
+
+            .searchbar{
+                margin-left: 2%;
+                width: 30%;
+                border-radius: .7rem; 
+            }
+
+            .add-btn{
+                margin-left: auto;
+                margin-right: 5%;
+                align-self: center;
+                margin-top: 1%;
+                font-size: 1.3rem;
+            }
+
+            .fname{
+                margin-left: 45%
+            }
+
+            .lname{
+                margin-left: 135%
+            }
+
+            .email{
+                margin-left: 60%
+            }
+
+            .phone{
+                margin-left: 20%
+            }
+
+            .pos{
+                margin-left: 22%
+            }
+
+            .edit{
+                margin-right: 5%
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form id="link">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+                <div class="container">
+                    <h:graphicImage url="IMG/BookHavenLogo.png" class="logo"></h:graphicImage>
+                    <a class="navbar-brand" href="#">BOOKHAVEN LIBRARY</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" datatarget="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" arialabel="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <h:commandLink class="nav-link" value="Dashboard" action="dashboard?facesredirect=true"/>
+                            </li>
+                            <li class="nav-item">
+                                <h:commandLink class="nav-link" value="Transactions" action="transactions?facesredirect=true"/>
+                            </li>
+                            <li class="nav-item active">
+                                <h:commandLink class="nav-link" value="Books"
+                                               action="books?faces-redirect=true"/>
+                            </li>
+                            <li class="nav-item">
+                                <h:commandLink class="nav-link" value="Customers"
+                                               action="customers?faces-redirect=true"/>
+                            </li>
+                            <li class="nav-item">
+                                <h:commandLink class="nav-link" value="Staffs"
+                                               action="staffs?faces-redirect=true"/>
+                            </li>
+                            <li class="nav-item">
+                                <h:commandLink class="nav-link" value="Authors"
+                                               action="authors?faces-redirect=true"/>
+                            </li>
+                            <li class="nav-item">
+                                <h:commandLink class="nav-link" value="Logout"
+                                               action="#{admin.logout}"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </h:form>
+        <h:form id="form1">
+            <div class="header">
+                <div class="search">
+                    <h:commandButton action="#{staffBean.search}" value="Search" class="search-btn"/>
+                    <h:inputText value="#{staffBean.searchName}" class="searchbar"/>
+                </div>
+                <h:commandButton action="add_staff" value="Add Staff" class="add-btn"/>
+            </div>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Position</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <h:dataTable value="#{staffBean.staffs}" var="staff" class="table table-striped">
+                        <h:column>
+                            <h:outputText value="#{staff.staffId}" class='id'/>
+                        </h:column>
+                        <h:column>
+                            <h:outputText value="#{staff.firstName}" class='fname'/>
+                        </h:column>
+                        <h:column>
+                            <h:outputText value="#{staff.lastName}" class='lname'/>
+                        </h:column>
+                        <h:column>
+                            <h:outputText value="#{staff.email}" class='email'/>
+                        </h:column>
+                        <h:column>
+                            <h:outputText value="#{staff.phone}" class='phone'/>
+                        </h:column>
+                        <h:column>
+                            <h:outputText value="#{staff.position}" class='pos'/>
+                        </h:column>
+                        <h:column>
+                            <h:commandLink value="Edit" action="#{staffBean.editStaff(staff)}" class="btn btn-warning edit"/>
+                            <h:commandLink value="Delete" action="#{staffBean.deleteStaff(staff.staffId)}" class="btn btn-danger"
+                                           onclick="return confirm('Are you sure you want to delete this staff?');"/>
+                        </h:column>
+                    </h:dataTable>
+                </tbody>
+            </table>
+        </h:form>        <script src="vendor/jquery/jquery.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap-datepicker.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"></script>
+        <script type="text/javascript">
+
+                                               $(document).ready(function () {
+                                                   $('.datepicker').datepicker({
+                                                   });
+                                               });
+        </script>
+    </h:body>
+</html>
+

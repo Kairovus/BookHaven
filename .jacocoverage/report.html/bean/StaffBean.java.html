@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>StaffBean.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;BookHaven&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">bean</a> &gt; <span class="el_source">StaffBean.java</span></div><h1>StaffBean.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package bean;
+
+import dao.StaffDAO;
+import java.util.List;
+import model.Staff;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
+
+/**
+ *
+ * @author Z
+ */
+@ManagedBean(name = &quot;staffBean&quot;)
+@SessionScoped
+
+<span class="fc" id="L22">public class StaffBean {</span>
+
+    private List&lt;Staff&gt; staffs;
+<span class="fc" id="L25">    private Staff staff = new Staff();</span>
+<span class="fc" id="L26">    private StaffDAO staffDAO = new StaffDAO();</span>
+    private String searchname;
+
+    public List&lt;Staff&gt; getStaffs() {
+<span class="pc bpc" id="L30" title="1 of 4 branches missed.">        if (searchname != null &amp;&amp; !searchname.isEmpty()) {</span>
+<span class="fc" id="L31">            staffs = staffDAO.getStaffByName(searchname);</span>
+        } else {
+<span class="fc" id="L33">            staffs = staffDAO.getAllStaff();</span>
+        }
+<span class="fc" id="L35">        return staffs;</span>
+    }
+
+    public String saveStaff() {
+<span class="fc" id="L39">        staffDAO.saveStaff(staff);</span>
+<span class="fc" id="L40">        staff = new Staff();</span>
+<span class="fc" id="L41">        return &quot;staffs&quot;;</span>
+    }
+
+    public String updateStaff() {
+<span class="fc" id="L45">        staffDAO.updateStaff(staff);</span>
+<span class="fc" id="L46">        staff = new Staff();</span>
+<span class="fc" id="L47">        return &quot;staffs&quot;;</span>
+    }
+
+    public String editStaff(Staff staff) {
+<span class="fc" id="L51">        this.staff = staff;</span>
+<span class="fc" id="L52">        return &quot;editStaff.xhtml&quot;;</span>
+    }
+
+    public String deleteStaff(int staffId) {
+<span class="fc" id="L56">        staffDAO.deleteStaff(staffId);</span>
+<span class="fc" id="L57">        staffs = staffDAO.getAllStaff();</span>
+<span class="fc" id="L58">        return &quot;staffs&quot;;</span>
+    }
+
+    public String clearStaff() {
+<span class="fc" id="L62">        this.staff = new Staff();</span>
+<span class="fc" id="L63">        return &quot;staffs&quot;;</span>
+    }
+
+    public void search() {
+<span class="fc" id="L67">        getStaffs();</span>
+<span class="fc" id="L68">    }</span>
+
+    public Staff getStaff() {
+<span class="fc" id="L71">        return staff;</span>
+    }
+
+    public void setStaff(Staff staff) {
+<span class="fc" id="L75">        this.staff = staff;</span>
+<span class="fc" id="L76">    }</span>
+
+    public String getSearchName() {
+<span class="fc" id="L79">        return searchname;</span>
+    }
+
+    public void setSearchName(String searchname) {
+<span class="fc" id="L83">        this.searchname = searchname;</span>
+<span class="fc" id="L84">    }</span>
+    
+    public void setStaffDAO(StaffDAO staffDAO){
+<span class="fc" id="L87">        this.staffDAO = staffDAO;</span>
+<span class="fc" id="L88">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
